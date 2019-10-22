@@ -19,7 +19,7 @@
 ########################################################################
 # Global vars                                                          #
 ########################################################################
-PROMPT=${PROMPT:-"true"}
+PROMPT=${PROMPT:-"false"}
 INSTALL_TYPE=${INSTALL_TYPE:-"Single Server"}
 
 ########################################################################
@@ -42,10 +42,10 @@ DB_DROP_EXISTING=${DB_DROP_EXISTING:-"false"}
 ########################################################################
 # OS vars
 ########################################################################
-OS_USER=${OS_USER:-"dojo-srv"}
+OS_USER=${OS_USER:-"dojo"}
 OS_PASS=${OS_PASS:-"wahlieboojoKa8aitheibai3"}
 DEV_OS_PASS="wahlieboojoKa8aitheibai3"
-OS_GROUP=${OS_GROUP:-"dojo-srv"}
+OS_GROUP=${OS_GROUP:-"dojo"}
 INSTALL_ROOT=${INSTALL_ROOT:-"/opt/dojo"}
 DOJO_SOURCE=${DOJO_SOURCE:-"$INSTALL_ROOT/django-DefectDojo"}
 DOJO_FILES=${DOJO_FILES:-"$INSTALL_ROOT/local"}

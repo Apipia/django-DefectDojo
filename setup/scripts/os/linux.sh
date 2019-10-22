@@ -57,6 +57,7 @@ function ubuntu_db_config() {
     # Check that the remote DB is available
     else
         # Just try and run quit in the remote DB - verifies connectivity and creds provided work
+        echo "if mysql -fs -h $DB_HOST -P $DB_PORT -u$DB_USER -p$DB_PASS -e "quit" > /dev/null 2>&1"
         if mysql -fs -h "$DB_HOST" -P "$DB_PORT" -u"$DB_USER" -p"$DB_PASS" -e "quit" > /dev/null 2>&1; then
             echo "=============================================================================="
             echo "  Remote $DB_TYPE server connectivey confirmed"

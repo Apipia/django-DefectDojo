@@ -18,12 +18,15 @@ init_install_creds() {
 	else
 	    # Generate a unique password for this install for the database user
 	    DB_PASS=`LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+ < /dev/urandom | head -c 24`
+	    export DB_PASS
+	    echo "DB_PASS=$DB_PASS"
 	    # Generate a unique password for this install for the database root user
 	    DB_ROOT=`LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+ < /dev/urandom | head -c 24`
 	    # Generate a unique password for this install for the OS user
 	    OS_PASS=`LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+ < /dev/urandom | head -c 24`
 	    # Generate a unique password for this install for the dojo admin user
 	    ADMIN_PASS=`LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+ < /dev/urandom | head -c 24`
+	    echo "ADMIN_PASS=$ADMIN_PASS"
 	fi
 
 	# Always generate unique values for any install type

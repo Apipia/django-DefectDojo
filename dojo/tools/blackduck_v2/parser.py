@@ -156,9 +156,11 @@ class BlackduckHubParser(object):
             desc += "**Base Score:** {} \n**Exploitability:** {} \n**Impact:** {}\n".format(
                 vuln["Base score"], vuln["Exploitability"], vuln["Impact"]
             )
-            desc += "**URL:** [{}]({})\n**Description:** {}\n".format(vuln["Vulnerability id"],
-                                                                      vuln["URL"],
-                                                                      vuln["Description"])
+            # Not all have a URL
+            if vuln["URL"] != "":
+                desc += "**URL:** [{}]({})\n".format(vuln["Vulnerability id"],
+                                                     vuln["URL"])
+            desc += "**Description:** {}\n".format(vuln["Description"])
         return desc
 
     def security_severity(self, vulns):

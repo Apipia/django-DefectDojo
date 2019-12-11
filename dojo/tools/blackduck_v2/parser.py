@@ -143,7 +143,7 @@ class BlackduckHubParser(object):
         :param vulns: Dictionary {component_version_identifier: [vulns]}
         :return:
         """
-        title = "Security Risk: {} {}".format(vulns[0]["Component name"],
+        title = "Security Risk: {}:{}".format(vulns[0]["Component name"],
                                               vulns[0]["Component version name"])
         return title
 

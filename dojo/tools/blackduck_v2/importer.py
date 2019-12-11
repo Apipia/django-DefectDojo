@@ -38,10 +38,12 @@ class BlackduckV2Importer(Importer):
         except Exception as e:
             print("Error processing file: {}".format(e))
 
-    def _process_zipfile(self, report):
+    def _process_zipfile(self, report: Path) -> (dict, dict):
         """
-        Will take a zip file, look for security.csv and files.csv and union them on project id.
-        This allows to have the file component for a vulnerability.
+        Open the zip file and extract information on vulnerable packages from security.csv,
+        as well as license risk information from components.csv.
+        :param report: the file
+        :return: (dict, dict)
         """
         components = dict()
         try:
@@ -70,7 +72,7 @@ class BlackduckV2Importer(Importer):
 
         return components, security_issues
 
-    def __get_components(self, csv_file):
+    def __get_components(self, csv_file) -> dict:
         """
         Builds a dictionary to reference components.
         Each component is represented
@@ -91,7 +93,7 @@ class BlackduckV2Importer(Importer):
                 = {x[0]: x[1] for x in record.items()}
         return components
 
-    def __get_security_risks(self, csv_file):
+    def __get_security_risks(self, csv_file) -> dict:
         """
         Creates a dictionary to represent vulnerabilities in a given component. Each entry in the
         dictionary is represented:

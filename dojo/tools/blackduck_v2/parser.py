@@ -52,6 +52,7 @@ class BlackduckHubParser(object):
                 severity = "High"
                 mitigation = self.license_mitigation(component)
                 impact = "N/A"
+                references = self.license_references(component)
                 uid = hashlib.md5(component_id.encode("utf-8")).hexdigest()
                 finding = Finding(title=title,
                                   test=test,
@@ -62,6 +63,7 @@ class BlackduckHubParser(object):
                                   numerical_severity=Finding.get_numerical_severity(severity),
                                   mitigation=mitigation,
                                   impact=impact,
+                                  references=references,
                                   static_finding=True,
                                   unique_id_from_tool=component_id,
                                   hash_code=uid)
@@ -130,6 +132,9 @@ class BlackduckHubParser(object):
         )
         mit += "Please use another component with an acceptable license."
         return mit
+
+    def license_references(self, component):
+        return "**Project:** {}\n".format(component["Project path"])
 
     def security_title(self, vulns):
         """
@@ -214,10 +219,11 @@ class BlackduckHubParser(object):
         :param vulns: Dictionary {component_version_identifier: [vulns]}
         :return:
         """
-        references = ""
+        references = "**Project:** {}\n".format(vulns[0]["Project path"])
         for vuln in vulns:
             if vuln["URL"] != "":
-                references += "{}: {}  \n".format(vuln["Vulnerability id"], vuln["URL"])
+                references += "{}: [{}]({})\n".format(vuln["Vulnerability id"], vuln["URL"],
+                                                      vuln["URL"])
         return references
 
     def security_filepath(self, vulns):

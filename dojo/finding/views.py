@@ -1127,15 +1127,6 @@ def edit_finding(request, fid):
                 if jform.is_valid():
                     push_to_jira = jform.cleaned_data.get('push_to_jira')
 
-                    if JIRA_Issue.objects.filter(finding=new_finding).exists():
-                        update_issue_task.delay(
-                            new_finding, old_status,
-                            jform.cleaned_data.get('push_to_jira'))
-                    else:
-                        add_issue_task.delay(
-                            new_finding,
-                            jform.cleaned_data.get('push_to_jira'))
-
             if 'githubform-push_to_github' in request.POST:
                 gform = JIRAFindingForm(
                     request.POST, prefix='githubform', enabled=enabled)
